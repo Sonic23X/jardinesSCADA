@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sensores_model extends CI_Model{
-
+class Sensores_model extends CI_Model
+{
   public function __construct()
   {
     parent::__construct();
@@ -54,6 +54,14 @@ class Sensores_model extends CI_Model{
       return $resultado->result();
     else
       return null;
+  }
+
+  function GetHistory($fecha = null)
+  {
+    if($fecha != null)
+    {
+      
+    }
   }
 
 }

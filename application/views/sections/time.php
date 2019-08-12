@@ -1,3 +1,3 @@
-    <div class="row clearfix mb-1">
-      
+    <div class="clearfix">
+
     </div>

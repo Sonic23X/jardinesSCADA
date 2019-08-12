@@ -1,10 +1,17 @@
 'use strict'
 
+//requires
+var express = require('express');
+var bodyParser = require('body-parser');
 var qs = require('querystring');
 var http = require('http');
 var mysql = require('mysql');
 var chalk = require('chalk');
 
+//creamos la app
+var app = express();
+
+//crear pool de conexiones
 var pool = mysql.createPool({
     connectionLimit: 50,
     host: 'localhost',
@@ -13,53 +20,67 @@ var pool = mysql.createPool({
     database: 'jardines',
   });
 
-var servidor = http.createServer((req, res) =>
+//tratamiento de la información al llegar
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post('/movimiento', function (req, res)
 {
-  //Handle POST Request
-  if (req.method == 'POST')
-  {
-    var cadena = '';
+
+    //ejemplo de cadena recibida '@P0000XX-100001#'
+    //datos que llegan
+
+    let data = req.body['data'];
+
+    //validamos que la cadena sea un array
+    if (Array.isArray(data))
+    {
+      for (let i = 0; i < data.length; i++)
+      {
+        activacion(data[i]);
+      }
+    } else
+    {
+      try
+      {
+        //dividimos la cadena de sensores
+        let buff = data.split('#');
+
+        //procesamos
+        for (var i = 0; i < buff.length - 1; i++)
+        {
+          activacion(buff[i]);
+        }
+      } catch (error)
+      {
+        console.log(chalk.yellow(`Valor recibido: ${data}; error -> ${error}`));
+      }
+    }
+
+    res.send();
+  });
+
+app.post('/php', function (req, res)
+{
+    var body = '';
+
     req.on('data', (data) =>
     {
-      cadena += data;
-    });
+        body += data;
+      });
 
     req.on('end', () =>
     {
-      var POST = qs.parse(cadena);
+        var POST = qs.parse(body);
 
-      console.log(cadena); // 'name=ben&foo=bar'
-      res.setHeader('Content-Type', 'application/json;charset=utf-8');
-      res.statusCode = 200;
-      if (Array.isArray(cadena))
-      {
-        for (let i = 0; i < cadena.length; i++)
-        {
-          activacion(cadena[i]);
-        }
-      } else
-      {
-        try
-        {
-          //dividimos la cadena de sensores
-          let buff = cadena.split('#');
+        console.log(body); // 'name=ben&foo=bar'
 
-          //procesamos
-          for (var i = 0; i < buff.length - 1; i++)
-          {
-            activacion(buff[i]);
-          }
-        } catch (error)
-        {
-          console.log(chalk.yellow(`Valor recibido: ${cadena}; error -> ${error}`));
-        }
-      }
+        res.setHeader('Content-Type', 'application/json;charset=utf-8');
+        res.statusCode = 200;
+        res.end(JSON.stringify(POST)); //your response
+      });
 
-      res.end();
-    });
-  }
-
-});
+    res.send();
+  });
 
 //funcion que inicia el sensor
 function activacion(cadena)
@@ -163,7 +184,8 @@ function statusSensor(cadena)
     return status[status.length];
 }
 
-servidor.listen(3000, (e, r) =>
+//empezamos el servidor
+var server = app.listen(3000, () =>
 {
-  console.log('listening');
-});
+    console.log('Servidor iniciado');
+  });

@@ -11,7 +11,7 @@
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
           <div class="card">
             <div class="header">
-              <h2 style='text-align:center;'>Sensores en movimiento</h2>
+              <h2 style='text-align:center;'>Historial de sensores</h2>
             </div>
             <div class="body">
               <div id="tablaSensores" class="table-responsive table-sensor"></div>
@@ -23,8 +23,8 @@
     </div>
   </section>
 
-  <!-- funcionamiento del monitoreo -->
-  <script type="text/javascript" src="<?= base_url() ?>resources/js/monitor.js">
+  <!-- funcionamiento del historial -->
+  <script type="text/javascript" src="<?= base_url() ?>resources/js/history.js">
   </script>
 
   <script type="text/javascript">

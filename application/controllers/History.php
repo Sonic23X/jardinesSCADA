@@ -7,6 +7,7 @@ class History extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->model('Sensores_model');
   }
 
   function Index()
@@ -31,6 +32,11 @@ class History extends CI_Controller
 
     //pie de pagina
     $this->load->view('common/footer');
+  }
+
+  function GetHistory()
+  {
+
   }
 
 }
