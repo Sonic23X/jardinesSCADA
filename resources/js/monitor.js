@@ -1,12 +1,14 @@
 'use strict'
 
+let servidor = 'http://192.168.0.102/jardines/';
+
 $(document).ready(() =>
 {
 
   function checkTable()
   {
     $.ajax({
-      url: 'http://localhost/jardines/Sensores/Table',
+      url: servidor + 'Sensores/Table',
       type: 'POST',
       success: (response) =>
       {
@@ -18,7 +20,7 @@ $(document).ready(() =>
   function checkMap()
   {
     $.ajax({
-      url: 'http://localhost/jardines/Sensores/Maps',
+      url: servidor + 'Sensores/Maps',
       type: 'POST',
       success: (response) =>
       {
@@ -29,7 +31,7 @@ $(document).ready(() =>
 
   //cargar los datos al momento de abrir la pagina
   $.ajax({
-    url: 'http://localhost/jardines/Sensores/Table',
+    url: servidor + 'Sensores/Table',
     type: 'POST',
     success: (response) =>
     {
@@ -38,7 +40,7 @@ $(document).ready(() =>
   });
 
   $.ajax({
-    url: 'http://localhost/jardines/Sensores/Maps',
+    url: servidor + 'Sensores/Maps',
     type: 'POST',
     success: (response) =>
     {

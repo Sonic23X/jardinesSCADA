@@ -1,5 +1,7 @@
 'use strict'
 
+let servidor = 'http://192.168.0.102/jardines/';
+
 $(document).ready(() =>
 {
   function basura()
@@ -7,12 +9,10 @@ $(document).ready(() =>
     $('#trash').html('');
 
     $.ajax({
-      url: 'http://localhost/jardines/Cisternas/GetDataTrash',
+      url: servidor + 'Cisternas/GetDataTrash',
       type: 'GET',
       success: (response) =>
       {
-        console.log(response);
-
         let barras = JSON.parse(response);
 
         Morris.Bar({
@@ -37,12 +37,10 @@ $(document).ready(() =>
     $('#water').html('');
 
     $.ajax({
-      url: 'http://localhost/jardines/Cisternas/GetDataWater',
+      url: servidor + 'Cisternas/GetDataWater',
       type: 'GET',
       success: (response) =>
       {
-        console.log(response);
-
         let barras = JSON.parse(response);
 
         Morris.Bar({

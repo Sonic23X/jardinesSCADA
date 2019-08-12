@@ -1,7 +1,7 @@
 <?php
 
   $host = 'http://localhost:3000/php';
-  $data = $_POST['data'];
+  $data = $_POST['cade'];
 
   $ch = curl_init($host);
   curl_setopt($ch, CURLOPT_HEADER, 1);

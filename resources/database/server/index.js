@@ -27,8 +27,6 @@ var servidor = http.createServer((req, res) =>
     req.on('end', () =>
     {
       var POST = qs.parse(cadena);
-
-      console.log(cadena); // 'name=ben&foo=bar'
       res.setHeader('Content-Type', 'application/json;charset=utf-8');
       res.statusCode = 200;
       if (Array.isArray(cadena))

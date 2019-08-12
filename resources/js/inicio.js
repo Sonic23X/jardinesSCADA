@@ -1,12 +1,14 @@
 'use strict'
 
+let servidor = 'http://192.168.0.102/jardines/';
+
 $(document).ready(() =>
 {
 
   function checkTable()
   {
     $.ajax({
-      url: 'http://localhost/jardines/Sensores/Check',
+      url: servidor + 'Sensores/Check',
       type: 'GET',
       success: (response) =>
       {
@@ -20,7 +22,7 @@ $(document).ready(() =>
     $('#bar').html('');
 
     $.ajax({
-      url: 'http://localhost/jardines/Cisternas/GetDataGeneral',
+      url: servidor + 'Cisternas/GetDataGeneral',
       type: 'GET',
       success: (response) =>
       {

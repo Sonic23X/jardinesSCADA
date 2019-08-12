@@ -6,7 +6,7 @@ $(document).ready(() => {
   {
 
     $.ajax({
-      url: 'http://localhost/jardines/Sensores/Tarjets',
+      url: servidor + 'Sensores/Tarjets',
       type: 'POST',
       success: (response) =>
       {
@@ -22,7 +22,7 @@ $(document).ready(() => {
   }
 
   $.ajax({
-    url: 'http://localhost/jardines/Sensores/Tarjets',
+    url: servidor + 'Sensores/Tarjets',
     type: 'POST',
     success: (response) =>
     {
