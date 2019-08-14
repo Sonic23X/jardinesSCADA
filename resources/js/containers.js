@@ -1,9 +1,10 @@
 'use strict'
 
-let servidor = 'http://192.168.0.102/jardines/';
-
 $(document).ready(() =>
 {
+
+  let servidor = 'http://localhost/jardines/';
+
   function basura()
   {
     $('#trash').html('');

@@ -8,12 +8,12 @@
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array
+  (
         'Content-Type: application/x-www-form-urlencoded',
         'Content-Length: ' . strlen($data))
   );
   $peticion = curl_exec($ch);
-  print_r($peticion);
-  echo "\n data -> " . $data;
+  echo "\n Enviado -> " . $data;
 
 ?>

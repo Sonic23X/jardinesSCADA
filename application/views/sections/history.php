@@ -11,7 +11,10 @@
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
           <div class="card">
             <div class="header">
-              <h2 style='text-align:center;'>Historial de sensores</h2>
+              <h2 style='text-align:center;'>
+                Historial de sensores
+                <i class="material-icons col-dark btn-play">play_circle_filled</i>
+              </h2>
             </div>
             <div class="body">
               <div id="tablaSensores" class="table-responsive table-sensor"></div>

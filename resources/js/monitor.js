@@ -1,19 +1,19 @@
 'use strict'
 
-let servidor = 'http://192.168.0.102/jardines/';
-
 $(document).ready(() =>
 {
+
+  let servidor = 'http://localhost/jardines/';
 
   function checkTable()
   {
     $.ajax({
       url: servidor + 'Sensores/Table',
-      type: 'POST',
+      type: 'GET',
       success: (response) =>
       {
         $('.table-sensor').html(response);
-      }
+      },
     });
   }
 
@@ -21,31 +21,31 @@ $(document).ready(() =>
   {
     $.ajax({
       url: servidor + 'Sensores/Maps',
-      type: 'POST',
+      type: 'GET',
       success: (response) =>
       {
         $('.items').html(response);
-      }
+      },
     });
   }
 
   //cargar los datos al momento de abrir la pagina
   $.ajax({
     url: servidor + 'Sensores/Table',
-    type: 'POST',
+    type: 'GET',
     success: (response) =>
     {
       $('.table-sensor').html(response);
-    }
+    },
   });
 
   $.ajax({
     url: servidor + 'Sensores/Maps',
-    type: 'POST',
+    type: 'GET',
     success: (response) =>
     {
       $('.items').html(response);
-    }
+    },
   });
 
   //hilos para ejecutar la funciones cada cierto tiempo #tiempo en milisegundos 1 s -> 1000 mls

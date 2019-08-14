@@ -60,8 +60,30 @@ class Sensores_model extends CI_Model
   {
     if($fecha != null)
     {
-      
+      $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
+        .$fecha['dia']."' AND HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
+
+      $resultado = $this->db->query($consulta);
+
+      if($resultado != null)
+        return $resultado->result();
     }
+    return null;
+  }
+
+  function GetNumHistory($fecha = null )
+  {
+    if($fecha != null)
+    {
+      $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
+        .$fecha['dia']."' AND HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
+
+      $resultado = $this->db->query($consulta);
+
+      if($resultado != null)
+        return $resultado->num_rows();
+    }
+    return null;
   }
 
 }
