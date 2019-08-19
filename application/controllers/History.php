@@ -41,50 +41,44 @@ class History extends CI_Controller
     $informacion = $this->Sensores_model->GetHistory($post['data']);
     $html = "";
 
-    $html .= "<table class='table table-hover dashboard-task-infos'>";
-    $html .= "<thead>";
-    $html .= "<tr>";
-    $html .= "<th style='text-align:center;'>Sensor</th>";
-    $html .= "<th style='text-align:center;'>Activación</th>";
-    $html .= "</tr>";
-    $html .= "</thead>";
-    $html .= "<tbody>";
-
-    foreach ($informacion as $sensor)
+    if($informacion == null)
+      $html = "<h4>Sin informacion</h4>";
+    else
     {
-      foreach ($sensor as $fila => $dato)
+      $html .= "<table class='table table-hover dashboard-task-infos'>";
+      $html .= "<thead>";
+      $html .= "<tr>";
+      $html .= "<th style='text-align:center;'>Sensor</th>";
+      $html .= "<th style='text-align:center;'>Activación</th>";
+      $html .= "</tr>";
+      $html .= "</thead>";
+      $html .= "<tbody>";
+
+      foreach ($informacion as $sensor)
       {
-        if($fila == "id_dispositivo")
+        foreach ($sensor as $fila => $dato)
         {
-          $html .= "<tr name='".(int)$dato."'>";
-          if((int)$dato < 10)
-            $html .= "<td style='text-align:center;'>S-00".(int)$dato."</td>";
-          else
-            $html .= "<td style='text-align:center;'>S-0".(int)$dato."</td>";
-        }
-        if($fila == "time")
-        {
-          $html .= "<td style='text-align:center;'>".$dato."</td>";
+          if($fila == "id_dispositivo")
+          {
+            $html .= "<tr name='".(int)$dato."'>";
+            if((int)$dato < 10)
+              $html .= "<td style='text-align:center;'>S-00".(int)$dato."</td>";
+            else
+              $html .= "<td style='text-align:center;'>S-0".(int)$dato."</td>";
+          }
+          if($fila == "time")
+          {
+            $html .= "<td style='text-align:center;'>".$dato."</td>";
+          }
         }
       }
+
+      $html .= "</tr>";
+      $html .= "</tbody>";
+      $html .= "</table>";
     }
 
-    $html .= "</tr>";
-    $html .= "</tbody>";
-    $html .= "</table>";
-
     $json = array('html' => $html);
-
-    echo json_encode($json);
-  }
-
-  function GetNumRows()
-  {
-    $post = $this->input->post();
-
-    $numero = $this->Sensores_model->GetNumHistory($post['data']);
-
-    $json = array('num' => $numero);
 
     echo json_encode($json);
   }

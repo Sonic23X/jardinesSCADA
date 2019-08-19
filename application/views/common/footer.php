@@ -11,6 +11,10 @@
     <script src="<?= base_url()?>vendor/plugins/raphael/raphael.min.js"></script>
     <script src="<?= base_url()?>vendor/plugins/morrisjs/morris.js"></script>
 
+    <!-- Datepicker Js -->
+    <script src="<?= base_url()?>vendor/datepicker/dist/datepicker.min.js"></script>
+
+    <!-- Timepicker Css -->
     <script src="<?= base_url()?>vendor/timepicker/jquery.timepicker.min.js"></script>
 
     <!-- Custom Js -->

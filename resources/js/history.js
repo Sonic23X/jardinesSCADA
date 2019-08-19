@@ -10,33 +10,10 @@ $(document).ready(() =>
 
   let servidor = 'http://localhost/jardines/';
 
+  //funciones
   function sleep(ms)
   {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  function checkHistory()
-  {
-
-    json =
-    {
-      dia: '2019-08-11',
-      inicio: 13,
-      fin: 15,
-      sensor: null,
-    };
-
-    $.ajax({
-      url: servidor + 'History/GetHistory',
-      type: 'POST',
-      dataType: 'json',
-      data: { data: json },
-      success: (response) =>
-      {
-        $('#tablaSensores').html(response.html);
-      },
-    });
-
   }
 
   async function setMap(registros)
@@ -64,25 +41,41 @@ $(document).ready(() =>
     $('.imgplano').css('z-index', '0');
   }
 
+  //creando el datepicker y los timepickers
+  $('#fecha').datepicker({
+      format: 'yyyy-mm-dd',
+      autoHide: true,
+      startDate: '2019-08-11',
+    });
+
   $('#timeStart').timepicker(
   {
-    timeFormat: 'h:mm p',
+    timeFormat: 'HH:mm',
     interval: 60,
-    minTime: '00',
-    maxTime: '11:00pm',
-    defaultTime: '00',
+    minTime: '00:00',
+    maxTime: '23:00',
+    defaultTime: '00:00',
     startTime: '10:00',
-    dynamic: true,
+    dynamic: false,
     dropdown: true,
     scrollbar: true,
-    change: (time) =>
-    {
-      let reloj = $('#timeStart').val();
-
-    },
   });
 
-  $('.btn-play').click((event) =>
+  $('#timeEnd').timepicker(
+  {
+    timeFormat: 'HH:mm',
+    interval: 60,
+    minTime: '00:00',
+    maxTime: '23:00',
+    defaultTime: '00:00',
+    startTime: '10:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true,
+  });
+
+  //eventos
+  $('.btn-play').click(event =>
   {
     //colocamos el z-index
     $('.imgplano').css('z-index', '2');
@@ -104,7 +97,45 @@ $(document).ready(() =>
 
   });
 
-  checkHistory();
+  $('#searchHistory').click(event =>
+  {
+    let inicio = $('#timeStart').val();
+    inicio = inicio.split(':')[0];
 
+    let fin = $('#timeEnd').val();
+    fin = fin.split(':')[0];
+
+    let fecha = $('#fecha').val();
+
+    let sensor = parseInt($('#sensor').val());
+
+    if (fecha != '')
+    {
+
+      json =
+      {
+        dia: fecha,
+        inicio: parseInt(inicio),
+        fin: parseInt(fin) - 1,
+        sensor: sensor,
+      };
+
+      $.ajax({
+        url: servidor + 'History/GetHistory',
+        type: 'POST',
+        dataType: 'json',
+        data: { data: json },
+        success: (response) =>
+        {
+          $('#tablaSensores').html(response.html);
+        },
+      });
+
+    } else
+    {
+      alert('Seleccione una fecha');
+    }
+
+  });
 
 });

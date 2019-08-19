@@ -33,6 +33,9 @@
     <!-- Morris Chart Css-->
     <link href="<?= base_url()?>vendor/plugins/morrisjs/morris.css" rel="stylesheet" />
 
+    <!-- Datepicker Css -->
+    <link href="<?= base_url() ?>vendor/datepicker/dist/datepicker.min.css" rel="stylesheet">
+
     <!-- Timepicker Css -->
     <link href="<?= base_url() ?>vendor/timepicker/jquery.timepicker.min.css" rel="stylesheet">
 

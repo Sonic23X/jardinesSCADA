@@ -60,28 +60,30 @@ class Sensores_model extends CI_Model
   {
     if($fecha != null)
     {
-      $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
-        .$fecha['dia']."' AND HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
+
+      $consulta = "";
+      if($fecha['sensor'] == 0)
+      {
+        $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
+          .$fecha['dia']."' AND HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
+      } else
+      {
+        //validar sensor
+        $sensor = "";
+        if($fecha['sensor'] < 10)
+          $sensor = '00000' . $fecha['sensor'];
+        else
+          $sensor = '0000' . $fecha['sensor'];
+
+        $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
+          .$fecha['dia']."' AND id_dispositivo='".$sensor. "' and"
+          ." HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
+      }
 
       $resultado = $this->db->query($consulta);
 
       if($resultado != null)
         return $resultado->result();
-    }
-    return null;
-  }
-
-  function GetNumHistory($fecha = null )
-  {
-    if($fecha != null)
-    {
-      $consulta = "SELECT id_dispositivo, time FROM history WHERE date='"
-        .$fecha['dia']."' AND HOUR(time) BETWEEN ".$fecha['inicio']." and ".$fecha['fin'];
-
-      $resultado = $this->db->query($consulta);
-
-      if($resultado != null)
-        return $resultado->num_rows();
     }
     return null;
   }

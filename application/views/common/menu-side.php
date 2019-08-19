@@ -44,7 +44,7 @@
         <a class="col-amber">Mutatio</a> &copy;
       </div>
       <div class="version col-white">
-        <b>Version: </b> 1.6.2
+        <b>Version: </b> 1.9.8
       </div>
     </div>
   </aside>
