@@ -81,7 +81,12 @@ function activacion(cadena)
       if (err) throw err;
       if (result.affectedRows == 1)
       {
-        console.log(chalk.green('activacion realizado, sensor:' + sensor));
+        let fecha = new Date();
+        let hora = fecha.getHours();
+        let min = fecha.getMinutes();
+        let seg = fecha.getSeconds();
+        console.log(chalk.green('activacion realizado, sensor -> ' + sensor
+          + ' hora: ' + hora + ':' + min + ':' + seg));
         historial(sensor);
         apagado(sensor);
       }
