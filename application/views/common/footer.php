@@ -11,6 +11,8 @@
     <script src="<?= base_url()?>vendor/plugins/raphael/raphael.min.js"></script>
     <script src="<?= base_url()?>vendor/plugins/morrisjs/morris.js"></script>
 
+    <script src="<?= base_url()?>vendor/timepicker/jquery.timepicker.min.js"></script>
+
     <!-- Custom Js -->
     <script src="<?= base_url()?>resources/js/interface/admin.js"></script>
     <script src="<?= base_url()?>resources/js/interface/demo.js"></script>

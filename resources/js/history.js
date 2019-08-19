@@ -5,6 +5,9 @@ var json;
 $(document).ready(() =>
 {
 
+  //retiramos el z-index
+  $('.imgplano').css('z-index', '0');
+
   let servidor = 'http://localhost/jardines/';
 
   function sleep(ms)
@@ -54,12 +57,36 @@ $(document).ready(() =>
       console.log(i);
       await sleep(2000);
     }
-    
+
     $('.items').html('');
+
+    //retiramos el z-index
+    $('.imgplano').css('z-index', '0');
   }
+
+  $('#timeStart').timepicker(
+  {
+    timeFormat: 'h:mm p',
+    interval: 60,
+    minTime: '00',
+    maxTime: '11:00pm',
+    defaultTime: '00',
+    startTime: '10:00',
+    dynamic: true,
+    dropdown: true,
+    scrollbar: true,
+    change: (time) =>
+    {
+      let reloj = $('#timeStart').val();
+
+    },
+  });
 
   $('.btn-play').click((event) =>
   {
+    //colocamos el z-index
+    $('.imgplano').css('z-index', '2');
+
     let numRegistros;
     let registros;
 
@@ -78,5 +105,6 @@ $(document).ready(() =>
   });
 
   checkHistory();
+
 
 });
